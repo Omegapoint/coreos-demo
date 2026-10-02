@@ -1,0 +1,8 @@
+variant: fcos
+version: 1.6.0
+passwd:
+  users:
+    - name: core
+      password_hash: $y$j9T$UMXB.O2Kyswizi7T6DFfg1$A/oIAWdZpwLiD1.HXgjHIOzp1xP0tANL15zPrrlonxC
+      ssh_authorized_keys:
+        - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDUgy5BRMPWyP99VTqdHAGsAmtIir/Z+2w2OqyCXXY6TrZ0x7NLvotFlNEMBnwLPSWU3ougiArHAV8Ow3geIIgb0222EsFXGsmZj01AIy+9uAivIANun6Qpw9bMa3a1rW7AuAoQcskDJKAZg4QFTHHyb1Rjzdrc9LuQ3Vj5auU0KuaBFtgdCnlCYnL+042EwYhDnbkhbGTffPd067mp2M2lwvJEVim7a5FP4Iom58utlW7Guw4wpHdpnI8QfUdQsRIEdDRSiutOtbTskrWNYygBTl1LiawYJVgYE7WL1SofqYvwdaWLSK1EcGXaHUTmry+UbfNyxUqQP8U7VnxesOAal5GGftA98zEtm7Cgf2GFy5wNFFgdwODvsq6yv0m3oplh+Mwcso98eMYX5xSfwyU59s/GMtpYajfWmiLURSkGs5Agu0/rfd/KhRDmq9oTI0RFqUtkK63BAtIUsHCEWBv07vEI6zs1BS0Qf3TMnO2eoQGRluw3IRyV7Jq6HY3H48M= helibom@helibom

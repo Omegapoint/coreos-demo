@@ -1,0 +1,11 @@
+variant: fcos
+version: 1.7.0
+storage:
+  files:
+    - path: /etc/hostname
+      contents:
+        inline: fcos205
+ignition:
+    config:
+        merge:
+            - source: "http://192.168.122.1:8000/ignition/common/core-user/config.ign"
