@@ -2,10 +2,13 @@
 # @file
 # @version 0.1
 
-all: ignition machines
+all: images ignition machines customize
 
 up:
 	exec ./machines/fcos205/run.sh
+
+images:
+	make -C ./bootc/
 
 machines: ignition
 	make -C ./machines/fcos205/
@@ -25,7 +28,8 @@ clean:
 
 distclean:
 	make -C ./ignition/ clean && \
-	make -C ./machines/fcos205/ distclean
+	make -C ./machines/fcos205/ distclean && \
+	make -C ./bootc/ clean
 
 .PHONY: serve ignition machines install up
 

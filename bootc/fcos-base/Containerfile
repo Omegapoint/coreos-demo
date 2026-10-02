@@ -1,0 +1,12 @@
+FROM quay.io/fedora/fedora-coreos:next-devel
+
+RUN dnf install -q -y \
+    nushell \
+    && dnf clean all -q \
+    && rm -rf \
+        /run/dnf \
+        /var/log/ \
+        /var/cache \
+        /var/lib/dnf
+
+RUN bootc container lint --skip var-tmpfiles
