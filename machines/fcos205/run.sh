@@ -7,6 +7,7 @@ vm_memory_mib=${VM_MEMORY_MIB:-4096}
 vm_vcpus=${VM_VCPUS:-2}
 vm_disk_size=${VM_DISK_SIZE:-15G}
 vm_disk="/var/lib/libvirt/images/$vm_name.qcow2"
+vm_iso="/var/lib/libvirt/images/$vm_name.iso"
 
 script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 iso_path="$script_dir/fedora-coreos-next-metal.x86_64.iso"
@@ -35,6 +36,9 @@ if virsh --connect qemu:///system dominfo "$vm_name" >/dev/null 2>&1; then
         || virsh --connect qemu:///system undefine "$vm_name" >/dev/null
 fi
 
+# Keep libvirt's ownership changes away from the project's working ISO.
+cp -- "$iso_path" "$vm_iso"
+
 # (Re)create the disk image, replacing any existing one.
 rm -f -- "$vm_disk"
 qemu-img create -f qcow2 -- "$vm_disk" "$vm_disk_size"
@@ -46,7 +50,7 @@ exec virt-install \
     --vcpus "$vm_vcpus" \
     --os-variant fedora-coreos-next \
     --disk "path=$vm_disk,format=qcow2,bus=virtio" \
-    --cdrom "$iso_path" \
+    --cdrom "$vm_iso" \
     --network network=default,model=virtio \
     --graphics spice \
     --virt-type kvm \

@@ -1,0 +1,10 @@
+variant: fcos
+version: 1.7.0
+storage:
+  files:
+    - path: /etc/containers/registries.conf.d/999-local-registry.conf
+      contents:
+        inline: |
+          [[registry]]
+          location="192.168.122.1:5000"
+          insecure=true

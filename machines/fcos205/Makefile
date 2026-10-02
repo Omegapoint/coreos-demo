@@ -26,7 +26,7 @@ customize:
 	podman run \
 		--rm --security-opt label=disable -v .:/data -w /data \
 		$(COREOS_INSTALLER_IMAGE) iso ignition embed \
-		--ignition-file=$(BOOT_IGNITION) $(COREOS_IMAGE)
+		--ignition-file=$(BOOT_IGNITION) --force $(COREOS_IMAGE)
 
 $(INSTALL_IGNITION): $(INSTALL_BUTANE)
 	podman run \
