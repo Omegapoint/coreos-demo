@@ -1,0 +1,17 @@
+variant: fcos
+version: 1.7.0
+storage:
+  files:
+    - path: /etc/hostname
+      contents:
+        inline: fcos205
+    - path: /etc/containers/registries.conf.d/999-local-registry.conf
+      contents:
+        inline: |
+          [[registry]]
+          location="http://192.168.122.1:5000"
+          insecure=true
+ignition:
+    config:
+        merge:
+            - source: "http://192.168.122.1:8000/ignition/common/core-user/config.ign"

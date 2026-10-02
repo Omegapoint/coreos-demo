@@ -1,0 +1,16 @@
+variant: fcos
+version: 1.7.0
+ignition:
+    config:
+        merge:
+            - source: "http://192.168.122.1:8000/ignition/common/core-user/config.ign"
+storage:
+  files:
+    - path: /etc/coreos/installer.d/00-custom-install.yaml
+      contents:
+        inline: |
+          ignition-url: "http://192.168.122.1:8000/machines/fcos205/install.ign"
+          insecure-ignition: true
+          dest-device: /dev/vda
+          platform: metal
+          fetch-retries: 10
