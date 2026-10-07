@@ -10,3 +10,4 @@ ignition:
         merge:
             - source: "http://192.168.122.1:8000/ignition/common/core-user/config.ign"
             - source: "http://192.168.122.1:8000/ignition/common/containers-registry/config.ign"
+            - source: "http://192.168.122.1:8000/ignition/k3s/cluster-server/config.ign"
