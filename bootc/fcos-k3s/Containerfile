@@ -1,0 +1,18 @@
+FROM localhost/fcos-base:latest
+
+ENV INSTALL_K3S_BIN_DIR="/usr/bin"
+
+# can't run rpm-ostree during build time
+ENV INSTALL_K3S_SKIP_SELINUX_RPM=true
+ENV INSTALL_K3S_SELINUX_WARN=true
+
+# can't run systemctl during build time
+ENV INSTALL_K3S_SKIP_ENABLE=true
+
+# K3S_TOKEN_FILE is supplied by the systemd drop-in at runtime.
+ENV INSTALL_K3S_EXEC="server" 
+
+RUN curl -sfL https://get.k3s.io | sh - 
+
+RUN bootc container lint \
+    --skip var-tmpfiles 

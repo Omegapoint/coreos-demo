@@ -1,0 +1,39 @@
+variant: fcos
+version: 1.7.0
+passwd:
+  groups:
+    - name: k3s-admin
+  users:
+    - name: core
+      groups:
+        - k3s-admin
+storage:
+  files: 
+    - path: /etc/rancher/k3s/config.yaml
+      mode: 0644
+      contents:
+        inline: |
+            cluster-init: true
+            write-kubeconfig-group: k3s-admin
+            write-kubeconfig-mode: "0640"
+    # secret is shredded in 'encrypt-k3s-credential.service'
+    - path: /var/tmp/rancher/k3s/k3s-token.secret
+      mode: 0400
+      contents:
+        local: k3s-token.secret
+  links:
+    # k3s is installed after Ignition; cannot activate services in bootc image build env
+    - path: /etc/systemd/system/multi-user.target.wants/k3s.service
+      target: /etc/systemd/system/k3s.service
+systemd:
+  units:
+    - name: encrypt-k3s-credential.service
+      enabled: true
+      contents_local: ./systemd/encrypt-k3s-credentials.service
+    - name: initial-bootc-switch.service
+      enabled: true
+      contents_local: ./systemd/initial-bootc-switch.service
+    - name: k3s.service
+      dropins:
+        - name: k3s-credentials-dropin.conf
+          contents_local: ./systemd/k3s-credentials-dropin.conf

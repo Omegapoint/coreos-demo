@@ -1,0 +1,18 @@
+[Unit]
+Description=Fetch bootable image and switch on first boot
+ConditionFirstBoot=true
+Wants=network-online.target
+After=network-online.target
+After=ignition-firstboot-complete.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=bootc switch \
+    --transport registry \
+    --soft-reboot auto \
+    --apply \
+192.168.122.1:5000/localhost/fcos-k3s:latest
+
+[Install]
+WantedBy=multi-user.target
